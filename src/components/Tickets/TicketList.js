@@ -4,7 +4,9 @@ import { Ticket } from "./Ticket.js";
 
 export const TicketsList = observer(({ store }) => {
   const ticketsStore = store.ticketsStore;
+  const currencyStore = store.currencyStore;
   ticketsStore.UpdateTicketsList();
+  currencyStore.fetchExchangeRates();
 
   return (
     <ul className="TicketsList">
@@ -16,7 +18,7 @@ export const TicketsList = observer(({ store }) => {
           ) {
             return null;
           } else {
-            return <Ticket ticket={ticket} />;
+            return <Ticket ticket={ticket} currencyStore={currencyStore} />;
           }
         })
       ) : (

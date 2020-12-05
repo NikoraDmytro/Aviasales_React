@@ -32,6 +32,10 @@ class TicketsStore {
       console.log(err);
     }
   });
+
+  ChangeCurrency(currency) {
+    this.currency = currency;
+  }
 }
 
 export default TicketsStore;
