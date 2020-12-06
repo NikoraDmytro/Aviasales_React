@@ -1,56 +1,37 @@
-import { observer } from "mobx-react";
-
 import { rootStore } from "./stores/RootStore.js";
 import { TicketsList } from "./components/Tickets/TicketList.js";
+import { CurrencyRadio } from "./components/Inputs/CurrencyRadio.js";
+import { AllCheckbox } from "./components/Inputs/Checkboxes/ShowAllCheckbox.js";
+import { StopsCheckbox } from "./components/Inputs/Checkboxes/StopsCheckbox.js";
 
-const Filters = ({ store }) => {
-  const filtersStore = store.filtersStore;
-
-  const Checkbox = (props) => {
-    const id = props.id;
-
-    return (
-      <>
-        <input
-          type="checkbox"
-          name={`Checkbox${id}`}
-          onChange={props.onChange}
-          checked={props.checked}
-        />
-        <label htmlFor={`Checkbox${id}`}>{props.children}</label>
-      </>
-    );
-  };
-
-  const AllCheckbox = observer((props) => (
-    <Checkbox
-      id={props.id}
-      onChange={() => filtersStore.clearFilters()}
-      checked={!filtersStore.filtersNumber}
-    >
-      {props.children}
-    </Checkbox>
-  ));
-
-  const StopsCheckbox = observer((props) => (
-    <Checkbox
-      id={props.id}
-      onChange={() => {
-        filtersStore.toggleFilter(props.id);
-      }}
-      checked={filtersStore.filters[props.id]}
-    >
-      {props.children}
-    </Checkbox>
-  ));
-
+const Filters = () => {
   return (
     <div className="Filters">
-      <AllCheckbox id="All">Все</AllCheckbox>
-      <StopsCheckbox id="0">Без пересадок</StopsCheckbox>
-      <StopsCheckbox id="1">1 пересадка</StopsCheckbox>
-      <StopsCheckbox id="2">2 пересадки</StopsCheckbox>
-      <StopsCheckbox id="3">3 пересадки</StopsCheckbox>
+      <AllCheckbox id="All" store={rootStore}>
+        Все
+      </AllCheckbox>
+      <StopsCheckbox id="0" store={rootStore}>
+        Без пересадок
+      </StopsCheckbox>
+      <StopsCheckbox id="1" store={rootStore}>
+        1 пересадка
+      </StopsCheckbox>
+      <StopsCheckbox id="2" store={rootStore}>
+        2 пересадки
+      </StopsCheckbox>
+      <StopsCheckbox id="3" store={rootStore}>
+        3 пересадки
+      </StopsCheckbox>
+    </div>
+  );
+};
+
+const CurrencySwitcher = () => {
+  return (
+    <div className="CurrencyRadio">
+      <CurrencyRadio id="radioRub" store={rootStore} currency="RUB" />
+      <CurrencyRadio id="radioUsd" store={rootStore} currency="USD" />
+      <CurrencyRadio id="radioEur" store={rootStore} currency="EUR" />
     </div>
   );
 };
@@ -58,7 +39,8 @@ const Filters = ({ store }) => {
 function App() {
   return (
     <>
-      <Filters store={rootStore} />
+      <CurrencySwitcher />
+      <Filters />
       <TicketsList store={rootStore} />
     </>
   );

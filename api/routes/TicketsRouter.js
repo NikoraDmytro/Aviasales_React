@@ -4,19 +4,13 @@ require("dotenv").config;
 const TicketModel = require("../models/Tickets.model.js");
 
 const Nester = (ticket) => {
-  return {
-    origin: ticket.origin,
-    origin_name: ticket.origin_name,
-    destination: ticket.destination,
-    destination_name: ticket.destination_name,
-    departure_date: ticket.departure_date,
-    departure_time: ticket.departure_time,
-    arrival_date: ticket.arrival_date,
-    arrival_time: ticket.arrival_time,
-    carrier: ticket.carrier,
-    stops: ticket.stops,
-    price: ticket.price,
-  };
+  let NewTicket = {};
+
+  for (let [key, value] of Object.entries(ticket)) {
+    NewTicket = { ...NewTicket, [key]: value };
+  }
+
+  return NewTicket;
 };
 
 router.get("/", async (req, res) => {

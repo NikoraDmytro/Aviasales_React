@@ -18,7 +18,7 @@ const TicketSchema = new mongoose.Schema({
     required: true,
   },
   departure_date: {
-    type: "date",
+    type: "string",
     required: true,
   },
   departure_time: {
@@ -26,7 +26,7 @@ const TicketSchema = new mongoose.Schema({
     required: true,
   },
   arrival_date: {
-    type: "date",
+    type: "string",
     required: true,
   },
   arrival_time: {
