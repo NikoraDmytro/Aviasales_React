@@ -14,14 +14,17 @@ export const Ticket = observer(({ ticket, currencyStore }) => {
 
   const Multiplier = currencyStore.Multiplier;
   const Icon = currencyStore.CurrencyIcon;
+  const Price = ticket.price * Multiplier + Icon;
 
   return (
     <li className="ticket">
-      {FormVisibility ? <OrderRegistrationForm /> : null}
+      {FormVisibility ? (
+        <OrderRegistrationForm Ticket={Ticket} Price={Price} />
+      ) : null}
       <div className="Price">
-        <button onClick={() => setFormVisibility(true)}>{`Купить за ${
-          ticket.price * Multiplier
-        }${Icon}`}</button>
+        <button onClick={() => setFormVisibility(true)}>
+          {`Купить за ${Price}`}
+        </button>
       </div>
       <div className="Information">
         {`${ticket.departure_time} ${ticket.stops} пересад${ending()} ${

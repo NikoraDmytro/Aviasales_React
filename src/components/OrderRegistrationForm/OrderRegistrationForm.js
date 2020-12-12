@@ -15,10 +15,9 @@ const TextInput = ({ label, ...props }) => {
   );
 };
 
-export const OrderRegistrationForm = () => {
+export const OrderRegistrationForm = ({ Ticket, Price }) => {
   return (
     <div className="ModalWindow">
-      <h1>Buy a ticket</h1>
       <Formik
         initialValues={{
           firstName: "",
@@ -28,8 +27,13 @@ export const OrderRegistrationForm = () => {
           passportNumber: "",
         }}
         validationSchema={FormValidation}
+        onSubmit={async ({ setSubmitting }) => {
+          await setTimeout(() => {}, 2000);
+          setSubmitting(false);
+        }}
       >
         <Form>
+          <h1>Order Registration</h1>
           <TextInput
             label="First Name"
             name="firstName"
@@ -61,7 +65,7 @@ export const OrderRegistrationForm = () => {
             placeholder="344567"
           />
 
-          <button type="submit">Submit</button>
+          <button type="submit">Купить за {Price}</button>
         </Form>
       </Formik>
     </div>
