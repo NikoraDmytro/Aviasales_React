@@ -1,5 +1,6 @@
 import { Form, Formik, useField } from "formik";
 import "./OrderRegistrationForm.scss";
+import { rootStore as store } from "../../stores/RootStore.js";
 import { FormValidation } from "../../utils/validation/FormValidation.js";
 
 const TextInput = ({ label, ...props }) => {
@@ -15,7 +16,12 @@ const TextInput = ({ label, ...props }) => {
   );
 };
 
-export const OrderRegistrationForm = ({ Ticket, Price }) => {
+export const OrderRegistrationForm = ({ Ticket, close }) => {
+  const Price = (
+    store.currencyStore.Multiplier * Ticket.price +
+    store.currencyStore.CurrencyIcon
+  ).ToFixed(2);
+
   return (
     <div className="ModalWindow">
       <Formik
@@ -28,7 +34,10 @@ export const OrderRegistrationForm = ({ Ticket, Price }) => {
         }}
         validationSchema={FormValidation}
         onSubmit={async ({ setSubmitting }) => {
-          await setTimeout(() => {}, 2000);
+          await setTimeout(() => {
+            alert("done");
+          }, 2000);
+          close();
           setSubmitting(false);
         }}
       >

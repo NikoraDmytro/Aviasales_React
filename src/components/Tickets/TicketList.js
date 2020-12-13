@@ -2,7 +2,17 @@ import { observer } from "mobx-react";
 import React from "react";
 import { Ticket } from "./Ticket.js";
 
-export const TicketsList = observer(({ store }) => {
+const Nester = (ticket) => {
+  let NewTicket = {};
+
+  for (let [key, value] of Object.entries(ticket)) {
+    NewTicket = { ...NewTicket, [key]: value };
+  }
+
+  return NewTicket;
+};
+
+export const TicketsList = observer(({ store, order }) => {
   const ticketsStore = store.ticketsStore;
   const currencyStore = store.currencyStore;
   ticketsStore.UpdateTicketsList();
@@ -18,7 +28,13 @@ export const TicketsList = observer(({ store }) => {
           ) {
             return null;
           } else {
-            return <Ticket ticket={ticket} currencyStore={currencyStore} />;
+            return (
+              <Ticket
+                ticket={ticket}
+                currencyStore={currencyStore}
+                order={() => order(Nester(ticket))}
+              />
+            );
           }
         })
       ) : (

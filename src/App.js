@@ -1,8 +1,10 @@
 import { rootStore } from "./stores/RootStore.js";
+import { OrderRegistrationForm } from "./components/OrderRegistrationForm/OrderRegistrationForm.js";
 import { TicketsList } from "./components/Tickets/TicketList.js";
 import { CurrencyRadio } from "./components/Inputs/CurrencyRadio.js";
 import { AllCheckbox } from "./components/Inputs/Checkboxes/ShowAllCheckbox.js";
 import { StopsCheckbox } from "./components/Inputs/Checkboxes/StopsCheckbox.js";
+import { useState } from "react";
 
 const Filters = () => {
   return (
@@ -37,11 +39,19 @@ const CurrencySwitcher = () => {
 };
 
 function App() {
+  const [TicketToBuy, setTicketToBuy] = useState({});
+
   return (
     <>
+      {TicketToBuy.price ? (
+        <OrderRegistrationForm
+          Ticket={TicketToBuy}
+          close={() => setTicketToBuy({})}
+        />
+      ) : null}
       <CurrencySwitcher />
       <Filters />
-      <TicketsList store={rootStore} />
+      <TicketsList store={rootStore} order={setTicketToBuy} />
     </>
   );
 }

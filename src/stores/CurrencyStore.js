@@ -34,8 +34,6 @@ export default class CurrencyStore {
   }
 
   get Multiplier() {
-    return parseFloat(
-      this.ExchangeRates[this.CurrentCurrency] / this.ExchangeRates["RUB"]
-    ).toFixed(2);
+    return this.ExchangeRates[this.CurrentCurrency] / this.ExchangeRates["RUB"];
   }
 }
