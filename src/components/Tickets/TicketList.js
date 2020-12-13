@@ -1,6 +1,7 @@
 import { observer } from "mobx-react";
 import React from "react";
 import { Ticket } from "./Ticket.js";
+import "./TicketList.scss";
 
 const Nester = (ticket) => {
   let NewTicket = {};

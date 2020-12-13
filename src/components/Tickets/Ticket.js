@@ -10,7 +10,7 @@ export const Ticket = observer(({ ticket, currencyStore, order }) => {
 
   const Multiplier = currencyStore.Multiplier;
   const Icon = currencyStore.CurrencyIcon;
-  const Price = ticket.price * Multiplier + Icon;
+  const Price = (ticket.price * Multiplier).toFixed(2) + Icon;
 
   return (
     <li className="ticket">

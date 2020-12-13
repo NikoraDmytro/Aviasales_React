@@ -1,0 +1,36 @@
+.CurrencyRadio_btn {
+  display: inline;
+  &:not(:last-child) label {
+    border-right: none;
+  }
+  &:first-child label {
+    border-radius: 10px 0 0 10px;
+  }
+  &:last-child label {
+    border-radius: 0 10px 10px 0;
+  }
+
+  input {
+    display: none;
+    &:hover + label {
+      border-color: rgba(33, 150, 243);
+      background-color: rgba(242, 252, 255);
+    }
+    &:checked + label {
+      background-color: rgba(33, 150, 243);
+      color: white;
+    }
+    &:checked:hover + label {
+      opacity: 0.5;
+    }
+  }
+
+  label {
+    font-size: 0.75em;
+    font-weight: bold;
+    color: rgba(33, 150, 243);
+    border: 1px solid rgba(210, 214, 213);
+    padding: 5% 10%;
+    cursor: pointer;
+  }
+}

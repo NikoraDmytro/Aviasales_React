@@ -1,3 +1,5 @@
+import "./CurrencyRadio.scss";
+
 const { observer } = require("mobx-react");
 
 export const CurrencyRadio = observer((props) => {
