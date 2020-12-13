@@ -17,10 +17,9 @@ const TextInput = ({ label, ...props }) => {
 };
 
 export const OrderRegistrationForm = ({ Ticket, close }) => {
-  const Price = (
-    store.currencyStore.Multiplier * Ticket.price +
-    store.currencyStore.CurrencyIcon
-  ).ToFixed(2);
+  const Price =
+    (store.currencyStore.Multiplier * Ticket.price).toFixed(2) +
+    store.currencyStore.CurrencyIcon;
 
   return (
     <div className="ModalWindow">
@@ -35,7 +34,7 @@ export const OrderRegistrationForm = ({ Ticket, close }) => {
         validationSchema={FormValidation}
         onSubmit={async ({ setSubmitting }) => {
           await setTimeout(() => {
-            alert("done");
+            alert("success");
           }, 2000);
           close();
           setSubmitting(false);
